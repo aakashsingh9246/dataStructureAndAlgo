@@ -45,20 +45,17 @@ func insertValue(v int, n *node) *node{
 	if v<n.data{
 		n.left = insertValue(v,n.left)
 		dif:=getHeight(n.left)-getHeight(n.right)
-		//fmt.Println(dif)
 		if dif==2{
 			if v<n.left.data {
 				n=rightRotate(n)
 			}else{
 				n= leftRightRotate(n)
-				inOrderTraversal(n)
 			}
 		}
 	}
 	if v>n.data{
 		n.right = insertValue(v, n.right)
 		dif:=getHeight(n.right)-getHeight(n.left)
-		///fmt.Println(dif)
 		if dif==2{
 			if v>n.right.data {
 				n=leftRotate(n)
@@ -67,7 +64,7 @@ func insertValue(v int, n *node) *node{
 			}
 		}
 	}
-	fmt.Println(n.data)
+	
 	return n
 }
 
@@ -140,9 +137,12 @@ func nextInt(n *node) int{
 
 func main(){
 	root:= &node{60,nil,nil}
-	var arr = []int{15,20}
+	var arr = []int{15,20,25,30,35,40,45,50,55,65,70}
 	for _,k:=range arr{
-		insertValue(k,root)
+		root = insertValue(k,root)
 	}
 	inOrderTraversal(root)
+	deleteNode(50,root)
+	inOrderTraversal(root)
+	fmt.Println(getHeight(root))
 }
